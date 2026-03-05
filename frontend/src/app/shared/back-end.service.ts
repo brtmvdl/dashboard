@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
+import { lastValueFrom } from 'rxjs'
 
 import { environment } from 'src/environments/environment'
 
 @Injectable({ providedIn: 'root' })
 export class BackEndService {
-  public constructor (
+  public constructor(
     private http: HttpClient
   ) { }
 
-  private getUserHeaders (): any {
-    return { }
+  private getUserHeaders(): any {
+    return {}
   }
 
-  public postRequest<T> (action: string, body: any = {}): Promise<T> {
+  public postRequest<T>(action: string, body: any = {}): Promise<T> {
     const headers = this.getUserHeaders()
 
-    return this.http.post<T>(
+    return lastValueFrom(this.http.post<T>(
       environment.backend.server.url + action,
       body,
       { headers }
-    ).toPromise()
+    )) as Promise<T>
   }
 }

@@ -95,5 +95,8 @@
       }
     }
   },
-  "defaultProject": "dashboard-frontend"
+  "defaultProject": "dashboard-frontend",
+  "cli": {
+    "analytics": false
+  }
 }
